@@ -1,10 +1,10 @@
 function reduce(arr, fn, initial) {
-  if(!arr.length){
-  	return;
-  }
- var result = fn(initial, arr[0]);
- reduce(arr.slice(1), fn, result);
- return result;
+ 	return (function reduceOne(index, value){
+ 		if(index < arr.length){
+ 			return reduceOne(index + 1, fn(value, arr[index], index, arr));
+ 		}
+ 		return value;
+ 	}(0, initial));
 }
 
 module.exports = reduce
